@@ -16,17 +16,19 @@
 
 namespace material {
 
-enum class MaterialType : int { 
-    LIQUID = 0, 
-    SOLID 
-};
+enum class MaterialType : int { LIQUID = 0, SOLID };
 
+/**
+ * @brief 
+ * 
+ */
 class MaterialPoint {
-    public:
-    MaterialPoint(std::pair<double, double>& startPos,
-                   std::pair<double, double>& startSpeed,
-                   std::pair<double, double>& startAcceleration,
-                   MaterialType materialType);
+public:
+    MaterialPoint(std::pair<double, double> startPos,
+    std::pair<double, double> startSpeed,
+    std::pair<double, double> startAcceleration,
+    double weight,
+    MaterialType materialType);
 
     MaterialPoint(const MaterialPoint& oth);
     MaterialPoint(MaterialPoint&& oth);
@@ -34,19 +36,22 @@ class MaterialPoint {
     MaterialPoint& operator=(const MaterialPoint& rhs);
     MaterialPoint& operator=(MaterialPoint&& rhs);
 
-    public:
-    const std::pair<double, double>& pos() const;
-    const std::pair<double, double>& speed() const;
-    const std::pair<double, double>& acceleration() const;
+public:
+    std::pair<double, double> pos() const;
+    std::pair<double, double> speed() const;
+    std::pair<double, double> acceleration() const;
+    double weight() const;
 
-    void setPos(const std::pair<double, double>& pos);
-    void setSpeed(const std::pair<double, double>& speed);
-    void setAcceleration(const std::pair<double, double>& acceleration);
+    void setPos(const std::pair<double, double> pos);
+    void setSpeed(const std::pair<double, double> speed);
+    void setAcceleration(const std::pair<double, double> acceleration);
+    void setWeight(double weight);
 
-    private:
+private:
     std::pair<double, double> pos_          = { 0, 0 }; // x, y
     std::pair<double, double> speed_        = { 0, 0 }; // Vx, Vy
     std::pair<double, double> acceleration_ = { 0, 0 }; // ax, ay
+    double weight_                          = 0;
     MaterialType materialType_              = MaterialType::SOLID;
 };
 
